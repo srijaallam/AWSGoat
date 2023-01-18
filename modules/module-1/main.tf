@@ -3595,8 +3595,8 @@ resource "null_resource" "file_replacement_lambda_data" {
 resource "null_resource" "file_replacement_api_gw" {
   provisioner "local-exec" {
     command     = <<EOF
-sed -i "s,API_GATEWAY_URL,${aws_api_gateway_deployment.apideploy_ba.invoke_url},g" resources/s3/webfiles/build/static/js/main.e5839717.js
-sed -i "s,API_GATEWAY_URL,${aws_api_gateway_deployment.apideploy_ba.invoke_url},g" resources/s3/webfiles/build/static/js/main.e5839717.js.map
+sed -i "s,API_GATEWAY_URL,https://awsgoat.cloudteamapp.com,g" resources/s3/webfiles/build/static/js/main.e5839717.js
+sed -i "s,API_GATEWAY_URL,https://awsgoat.cloudteamapp.com,g" resources/s3/webfiles/build/static/js/main.e5839717.js.map
 sed -i 's/"\/static/"https:\/\/${aws_s3_bucket.bucket_upload.bucket}\.s3\.amazonaws\.com\/build\/static/g' resources/s3/webfiles/build/static/js/main.e5839717.js
 sed -i 's/n.p+"static/"https:\/\/${aws_s3_bucket.bucket_upload.bucket}\.s3\.amazonaws\.com\/build\/static/g' resources/s3/webfiles/build/static/js/main.e5839717.js
 EOF
@@ -3611,8 +3611,8 @@ EOF
 resource "null_resource" "file_replacement_api_gw_cleanup" {
   provisioner "local-exec" {
     command     = <<EOF
-sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.e5839717.js
-sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.e5839717.js.map
+sed -i "s,https://awsgoat.cloudteamapp.com,API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.e5839717.js
+sed -i "s,https://awsgoat.cloudteamapp.com,API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.e5839717.js.map
 sed -i 's/${aws_instance.goat_instance.public_ip}/EC2_IP_ADDR/g' resources/s3/shared/shared/files/.ssh/config.txt
 EOF
     interpreter = ["/bin/bash", "-c"]
